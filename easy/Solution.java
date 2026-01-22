@@ -1,29 +1,17 @@
-import java.util.HashMap;
-import java.util.Map;
-
-class Solution {
-    public int romanToInt(String s) {
-            Map<Character, Integer> romanMap = new HashMap<>();
-            romanMap.put('I', 1);
-            romanMap.put('V', 5);
-            romanMap.put('X', 10);
-            romanMap.put('L', 50);
-            romanMap.put('C', 100);
-            romanMap.put('D', 500);
-            romanMap.put('M', 1000);
-
-            int total = 0;
-            int previousValue = 0;
-
-            for (char c : s.toCharArray()){
-                int currentValue = romanMap.get(c);
-                if (currentValue > previousValue){
-                    total += currentValue - (2 * previousValue);
-                } else {
-                    total += currentValue;
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) return ""; 
+        
+        for (int i = 0; i < strs[0].length(); i++) {
+            char c = strs[0].charAt(i); 
+            
+            for (int j = 1; j < strs.length; j++) {
+                if (i >= strs[j].length() || strs[j].charAt(i) != c) {
+                    return strs[0].substring(0, i);
                 }
-                previousValue = currentValue;
             }
-            return total;
         }
+        
+        return strs[0];
     }
+}
