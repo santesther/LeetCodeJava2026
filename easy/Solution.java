@@ -1,19 +1,12 @@
-import java.util.HashMap;
-
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> vistos = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            int falta = target - nums[i];
-
-            if (vistos.containsKey(falta)) {
-                return new int[]{vistos.get(falta), i};
-            }
-
-            vistos.put(nums[i], i);
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false;
+        int original = x;
+        int rev = 0;
+        while (x != 0) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
         }
-
-        return null;
-    }
+        return original == rev;
+    } 
 }
