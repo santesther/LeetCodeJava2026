@@ -1,17 +1,23 @@
-public class Solution {
-    public String longestCommonPrefix(String[] strs) {
-        if (strs == null || strs.length == 0) return ""; 
+import java.util.Stack;
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
         
-        for (int i = 0; i < strs[0].length(); i++) {
-            char c = strs[0].charAt(i); 
-            
-            for (int j = 1; j < strs.length; j++) {
-                if (i >= strs[j].length() || strs[j].charAt(i) != c) {
-                    return strs[0].substring(0, i);
+        for (int i=0; i< s.length(); i++){
+            char c = s.charAt(i);
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' || c == '}' || c == ']') { 
+                if (stack.isEmpty()) return false;
+                char top = stack.pop();
+                if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '[')) {
+                    return false;
                 }
             }
         }
-        
-        return strs[0];
+        return stack.isEmpty();
     }
 }
