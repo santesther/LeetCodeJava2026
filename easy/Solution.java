@@ -1,23 +1,18 @@
-import java.util.Stack;
-
 class Solution {
-    public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-        
-        for (int i=0; i< s.length(); i++){
-            char c = s.charAt(i);
-            if (c == '(' || c == '{' || c == '[') {
-                stack.push(c);
-            } else if (c == ')' || c == '}' || c == ']') { 
-                if (stack.isEmpty()) return false;
-                char top = stack.pop();
-                if ((c == ')' && top != '(') ||
-                (c == '}' && top != '{') ||
-                (c == ']' && top != '[')) {
-                    return false;
-                }
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode preHead = new ListNode(0);
+        ListNode last = preHead;
+        while (list1 != null && list2 != null){
+            if (list1.val > list2.val){
+                last.next = list2;
+                list2 = list2.next;
+            } else {
+                last.next = list1;
+                list1 = list1.next;
             }
+            last = last.next;
         }
-        return stack.isEmpty();
+        last.next = list1 == null ? list2 : list1;
+        return preHead.next;
     }
 }
